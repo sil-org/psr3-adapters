@@ -20,7 +20,8 @@
     },
     "suggest": {
         "monolog/monolog": "^1.22",
-        "simplesamlphp/simplesamlphp": "^1.14.12"
+        "simplesamlphp/simplesamlphp": "^1.14.12",
+        "yiisoft/yii2": "^2.0"
     },
     "autoload": {
         "psr-4": {
