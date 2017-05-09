@@ -25,7 +25,7 @@ class Psr3Yii2Logger extends LoggerBase
     {
         if (is_string($message)) {
             $message = $this->interpolate($message, $context);
-        } elseif ( !empty ($context)) {
+        } elseif ( ! empty ($context)) {
             throw new \Psr\Log\InvalidArgumentException(sprintf(
                 'Cannot use context values (%s) for non-string message (%s).',
                 var_export($context, true),
