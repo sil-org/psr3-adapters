@@ -23,31 +23,39 @@ class Psr3Yii2Logger extends LoggerBase
      */
     public function log($level, $message, array $context = [])
     {
-        $messageWithContext = $this->interpolate($message, $context);
+        if (is_string($message)) {
+            $message = $this->interpolate($message, $context);
+        } elseif ( !empty ($context)) {
+            throw new \Psr\Log\InvalidArgumentException(sprintf(
+                'Cannot use context values (%s) for non-string message (%s).',
+                var_export($context, true),
+                var_export($message, true)
+            ), 1494339014);
+        }
         switch ($level) {
             case PsrLogLevel::EMERGENCY:
-                Yii::error($messageWithContext);
+                Yii::error($message);
                 break;
             case PsrLogLevel::ALERT:
-                Yii::error($messageWithContext);
+                Yii::error($message);
                 break;
             case PsrLogLevel::CRITICAL:
-                Yii::error($messageWithContext);
+                Yii::error($message);
                 break;
             case PsrLogLevel::ERROR:
-                Yii::error($messageWithContext);
+                Yii::error($message);
                 break;
             case PsrLogLevel::WARNING:
-                Yii::warning($messageWithContext);
+                Yii::warning($message);
                 break;
             case PsrLogLevel::NOTICE:
-                Yii::info($messageWithContext);
+                Yii::info($message);
                 break;
             case PsrLogLevel::INFO:
-                Yii::info($messageWithContext);
+                Yii::info($message);
                 break;
             case PsrLogLevel::DEBUG:
-                Yii::trace($messageWithContext);
+                Yii::trace($message);
                 break;
             default:
                 throw new \Psr\Log\InvalidArgumentException(
