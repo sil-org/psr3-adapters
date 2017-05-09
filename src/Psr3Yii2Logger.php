@@ -12,6 +12,11 @@ use Yii;
  */
 class Psr3Yii2Logger extends LoggerBase
 {
+    public function __construct()
+    {
+        $this->isArraySupported = true;
+    }
+    
     /**
      * Log a message.
      *
@@ -23,39 +28,31 @@ class Psr3Yii2Logger extends LoggerBase
      */
     public function log($level, $message, array $context = [])
     {
-        if (is_string($message)) {
-            $message = $this->interpolate($message, $context);
-        } elseif ( ! empty ($context)) {
-            throw new \Psr\Log\InvalidArgumentException(sprintf(
-                'Cannot use context values (%s) for non-string message (%s).',
-                var_export($context, true),
-                var_export($message, true)
-            ), 1494339014);
-        }
+        $messageToLog = $this->interpolate($message, $context);
         switch ($level) {
             case PsrLogLevel::EMERGENCY:
-                Yii::error($message);
+                Yii::error($messageToLog);
                 break;
             case PsrLogLevel::ALERT:
-                Yii::error($message);
+                Yii::error($messageToLog);
                 break;
             case PsrLogLevel::CRITICAL:
-                Yii::error($message);
+                Yii::error($messageToLog);
                 break;
             case PsrLogLevel::ERROR:
-                Yii::error($message);
+                Yii::error($messageToLog);
                 break;
             case PsrLogLevel::WARNING:
-                Yii::warning($message);
+                Yii::warning($messageToLog);
                 break;
             case PsrLogLevel::NOTICE:
-                Yii::info($message);
+                Yii::info($messageToLog);
                 break;
             case PsrLogLevel::INFO:
-                Yii::info($message);
+                Yii::info($messageToLog);
                 break;
             case PsrLogLevel::DEBUG:
-                Yii::trace($message);
+                Yii::trace($messageToLog);
                 break;
             default:
                 throw new \Psr\Log\InvalidArgumentException(
