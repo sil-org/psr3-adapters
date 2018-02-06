@@ -2,10 +2,10 @@
 namespace Sil\Psr3Adapters;
 
 use Psr\Log\LogLevel as PsrLogLevel;
-use SimpleSAML_Logger;
+use SimpleSAML\Logger;
 
 /**
- * A minimalist wrapper library (for SimpleSAML_Logger) to make it PSR-3
+ * A minimalist wrapper library (for SimpleSAML\Logger) to make it PSR-3
  * compatible.
  */
 class Psr3SamlLogger extends LoggerBase
@@ -24,28 +24,28 @@ class Psr3SamlLogger extends LoggerBase
         $messageWithContext = $this->interpolate($message, $context);
         switch ($level) {
             case PsrLogLevel::EMERGENCY:
-                SimpleSAML_Logger::emergency($messageWithContext);
+                Logger::emergency($messageWithContext);
                 break;
             case PsrLogLevel::ALERT:
-                SimpleSAML_Logger::alert($messageWithContext);
+                Logger::alert($messageWithContext);
                 break;
             case PsrLogLevel::CRITICAL:
-                SimpleSAML_Logger::critical($messageWithContext);
+                Logger::critical($messageWithContext);
                 break;
             case PsrLogLevel::ERROR:
-                SimpleSAML_Logger::error($messageWithContext);
+                Logger::error($messageWithContext);
                 break;
             case PsrLogLevel::WARNING:
-                SimpleSAML_Logger::warning($messageWithContext);
+                Logger::warning($messageWithContext);
                 break;
             case PsrLogLevel::NOTICE:
-                SimpleSAML_Logger::notice($messageWithContext);
+                Logger::notice($messageWithContext);
                 break;
             case PsrLogLevel::INFO:
-                SimpleSAML_Logger::info($messageWithContext);
+                Logger::info($messageWithContext);
                 break;
             case PsrLogLevel::DEBUG:
-                SimpleSAML_Logger::debug($messageWithContext);
+                Logger::debug($messageWithContext);
                 break;
             default:
                 throw new \Psr\Log\InvalidArgumentException(
