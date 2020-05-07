@@ -16,7 +16,7 @@ class Psr3ConsoleLogger extends LoggerBase
      */
     public function log($level, $message, array $context = [])
     {
-        $this->stdout_echo(
+        $this->writeToStdOut(
             sprintf(
                 'LOG: [%s] %s',
                 $level,
@@ -25,13 +25,13 @@ class Psr3ConsoleLogger extends LoggerBase
         );
     }
 
-    private function stdout_echo($message)
+    private function writeToStdOut($message)
     {
         $fileHandle = fopen('php://stdout', 'w+');
         if ($fileHandle === false) {
             return;
         }
-        fprintf($fileHandle, $message);
+        fwrite($fileHandle, $message);
         fclose($fileHandle);
     }
 }
