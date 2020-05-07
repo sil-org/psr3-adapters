@@ -6,12 +6,3 @@ services:
             - ./:/data
         working_dir: /data
         command: ["true"]
-
-networks:
-    default:
-        driver: bridge
-        ipam:
-            driver: default
-            config:
-            - subnet: 10.21.35.0/24
-              gateway: 10.21.35.1

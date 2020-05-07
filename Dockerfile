@@ -9,10 +9,7 @@ RUN apt-get update -y && echo "America/New_York" > /etc/timezone; \
 
 # Make sure apt has current list/updates
 # Install necessary PHP building blocks
-# Install Apache and PHP (and any needed extensions).
-# Install mock DB stuff
-RUN apt-get install -y zip unzip make curl wget \
-    php php-pdo php-xml php-mbstring sqlite php-sqlite3
+RUN apt-get install -y zip unzip make curl wget php
 
 RUN mkdir -p /data
 WORKDIR /data

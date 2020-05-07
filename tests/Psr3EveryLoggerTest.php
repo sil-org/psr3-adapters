@@ -10,30 +10,53 @@ use Sil\Psr3Adapters\Psr3Yii2Logger;
 
 class Psr3EveryLoggerTest extends TestCase
 {
-    public function testLogKnownLogLevel()
-    {
-        // Arrange:
-        putenv('SIMPLESAMLPHP_CONFIG_DIR=../vendor/simplesamlphp/simplesamlphp/config-templates/');
-        $tests = [
-            'console' => ['logger' => new Psr3ConsoleLogger()],
-            'syslog' => ['logger' => new Psr3SyslogLogger('testName', null)],
-            'saml' => ['logger' => new Psr3SamlLogger()],
-            // Excluding, because it needs a rework, and this is just to get console working
-            // 'yii2' => ['logger' => new Psr3Yii2Logger()],
-        ];
-        foreach ($tests as $testName => $testConfig) {
-            $logger = $testConfig['logger'];
-            $this->assertIsObject(
-                $logger,
-                sprintf(
-                    'Expected an object for the logger for the %s test',
-                    $testName
-                )
-            );
-            $psrLevel = PsrLogLevel::CRITICAL; // Some known log level.
+    // Excluding Psr3Yii2Logger, because it needs a rework,
+    // and this is just to get console working
 
-            // Act: if fails ungracefully, then test failed.
-            $logger->log($psrLevel, 'Some message');
+    public function testLogKnownLogLevelConsole()
+    {
+        $this->checkSpecificLogger(new Psr3ConsoleLogger());
+    }
+
+    public function testLogKnownLogLevelSyslog()
+    {
+        $this->checkSpecificLogger(new Psr3SyslogLogger());
+    }
+
+    public function testLogKnownLogLevelSaml()
+    {
+        putenv('SIMPLESAMLPHP_CONFIG_DIR=../vendor/simplesamlphp/simplesamlphp/config-templates/');
+        $this->checkSpecificLogger(new Psr3SamlLogger());
+    }
+
+    /**
+     * @param Psr3SamlLogger|Psr3SyslogLogger|Psr3ConsoleLogger $logger
+     */
+    private function checkSpecificLogger($logger)
+    {
+        $this->assertIsObject(
+            $logger,
+            sprintf(
+                'Expected an object for the logger for the %s test',
+                get_class($logger)
+            )
+        );
+
+        $psrLevels = [
+            PsrLogLevel::EMERGENCY,
+            PsrLogLevel::ALERT,
+            PsrLogLevel::CRITICAL,
+            PsrLogLevel::ERROR,
+            PsrLogLevel::WARNING,
+            PsrLogLevel::NOTICE,
+            PsrLogLevel::INFO,
+            PsrLogLevel::DEBUG,
+        ];
+        
+        foreach ($psrLevels as $psrLevel) {
+            // if fails ungracefully, then test failed.
+            // Saml's DEBUG and INFO don't output by default.
+            $logger->log($psrLevel, sprintf('Some %s message', $psrLevel));
         }
     }
 
