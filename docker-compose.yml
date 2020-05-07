@@ -1,0 +1,8 @@
+version: '2.2'
+services:
+    cli:
+        build: ./
+        volumes:
+            - ./:/data
+        working_dir: /data
+        command: ["true"]
