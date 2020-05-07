@@ -13,14 +13,25 @@ class Psr3ConsoleLogger extends LoggerBase
      * @param mixed $level
      * @param string $message
      * @param array $context
-     * @return null
      */
     public function log($level, $message, array $context = [])
     {
-        echo sprintf(
-            'LOG: [%s] %s',
-            $level,
-            $this->interpolate($message, $context)
-        ) . PHP_EOL;
+        $this->writeToStdOut(
+            sprintf(
+                'LOG: [%s] %s',
+                $level,
+                $this->interpolate($message, $context)
+            ) . PHP_EOL
+        );
+    }
+
+    private function writeToStdOut($message)
+    {
+        $fileHandle = fopen('php://stdout', 'w+');
+        if ($fileHandle === false) {
+            return;
+        }
+        fwrite($fileHandle, $message);
+        fclose($fileHandle);
     }
 }
