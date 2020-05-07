@@ -1,0 +1,20 @@
+FROM silintl/php7:7.2
+MAINTAINER Mark Tompsett <mark_tompsett@sil.org>
+
+ENV REFRESHED_AT 2020-05-07
+
+# Fix timezone stuff from hanging.
+RUN apt-get update -y && echo "America/New_York" > /etc/timezone; \
+    apt-get install -y tzdata
+
+# Make sure apt has current list/updates
+# Install necessary PHP building blocks
+RUN apt-get install -y zip unzip make curl wget php
+
+RUN mkdir -p /data
+WORKDIR /data
+COPY ./ /data
+
+RUN cd /data && ./composer-install.sh
+RUN mv /data/composer.phar /usr/bin/composer
+RUN cd /data/tests && ln -sf ../vendor/phpunit/phpunit/phpunit phpunit
