@@ -24,7 +24,7 @@ class Psr3ConsoleLogger extends LoggerBase
             ) . PHP_EOL
         );
     }
-    
+
     private function stdout_echo($message)
     {
         $fileHandle = fopen('php://stdout', 'w+');
