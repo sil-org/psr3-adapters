@@ -69,12 +69,8 @@ class Psr3EveryLoggerTest extends TestCase
         $logger->log('unknown', 'A test message');
     }
 
-    public function testLogUnknownLogLevelSyslog()
-    {
-        $logger = new Psr3SyslogLogger('testName', null);
-        $this->expectException('\Psr\Log\InvalidArgumentException');
-        $logger->log('unknown', 'A test message');
-    }
+    // Syslog triggers exceptions in Monolog/Logger
+    // for unknown levels, but not our code. No need to test. 
 
     public function testLogUnknownLogLevelYii2()
     {
