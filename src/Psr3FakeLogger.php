@@ -19,12 +19,11 @@ class Psr3FakeLogger extends LoggerBase
      */
     public function log($level, $message, array $context = [])
     {
-        $this->log[] = 
-            sprintf(
-                'LOG: [%s] %s',
-                $level,
-                $this->interpolate($message, $context)
-            );
+        $this->log[] = sprintf(
+            'LOG: [%s] %s',
+            $level,
+            $this->interpolate($message, $context)
+        );
     }
 
     /**
