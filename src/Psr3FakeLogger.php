@@ -41,7 +41,6 @@ class Psr3FakeLogger extends LoggerBase
      */
     public function hasSpecificLog($needle, $strict = false)
     {
-        
         $strictMatch = false;
         $looseMatch = false;
         foreach ($this->log as $entry) {
