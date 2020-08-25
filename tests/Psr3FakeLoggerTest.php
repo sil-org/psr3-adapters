@@ -24,7 +24,7 @@ class Psr3FakeLoggerTest extends TestCase
         Assert::assertTrue($hasSpecificLog, 'Missing expected log entry (loose)');
 
         $hasSpecificLog = $psr3FakeLogger->hasSpecificLog('Specific', true);
-        Assert::assertFalse($hasSpecificLog, 'Missing expected log entry (tight)');
+        Assert::assertFalse($hasSpecificLog, 'Unexpectedly found partial match (tight)');
 
         $hasSpecificLog = $psr3FakeLogger->hasSpecificLog('LOG: [warning] Specific message', true);
         Assert::assertTrue($hasSpecificLog, 'Missing expected specific log entry (tight)');
