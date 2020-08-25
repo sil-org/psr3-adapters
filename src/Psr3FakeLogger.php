@@ -2,8 +2,9 @@
 namespace Sil\Psr3Adapters;
 
 /**
- * A basic PSR-3 compliant logger that merely echoes logs to the console
- * (primarily intended for use in tests).
+ * A basic PSR-3 compliant logger that stores log entries in an array.
+ * This allows confirmation that logging has occurred using
+ * hasLogs and hasSpecificLog methods.
  */
 class Psr3FakeLogger extends LoggerBase
 {
