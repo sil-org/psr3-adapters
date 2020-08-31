@@ -5,8 +5,10 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel as PsrLogLevel;
 use Sil\Psr3Adapters\Psr3ConsoleLogger;
+use Sil\Psr3Adapters\Psr3EchoLogger;
 use Sil\Psr3Adapters\Psr3FakeLogger;
 use Sil\Psr3Adapters\Psr3SamlLogger;
+use Sil\Psr3Adapters\Psr3StdOutLogger;
 use Sil\Psr3Adapters\Psr3SyslogLogger;
 use Sil\Psr3Adapters\Psr3Yii2Logger;
 
@@ -18,6 +20,16 @@ class Psr3EveryLoggerTest extends TestCase
     public function testLogKnownLogLevelConsole()
     {
         $this->checkSpecificLogger(new Psr3ConsoleLogger());
+    }
+
+    public function testLogKnownLogLevelEcho()
+    {
+        $this->checkSpecificLogger(new Psr3EchoLogger());
+    }
+
+    public function testLogKnownLogLevelStdOut()
+    {
+        $this->checkSpecificLogger(new Psr3StdOutLogger());
     }
 
     public function testLogKnownLogLevelSyslog()
