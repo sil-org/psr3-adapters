@@ -2,8 +2,9 @@
 namespace Sil\Psr3Adapters;
 
 /**
- * A basic PSR-3 compliant logger that writes logs to stdout. Note that this
- * will bypass any output buffering that PHP may be doing.
+ * A basic PSR-3 compliant logger that writes logs to stdout.
+ *
+ * NOTE: This bypasses any output buffering that PHP may be doing.
  */
 class Psr3StdOutLogger extends LoggerBase
 {
