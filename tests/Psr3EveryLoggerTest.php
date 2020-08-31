@@ -8,6 +8,7 @@ use Sil\Psr3Adapters\Psr3ConsoleLogger;
 use Sil\Psr3Adapters\Psr3EchoLogger;
 use Sil\Psr3Adapters\Psr3FakeLogger;
 use Sil\Psr3Adapters\Psr3SamlLogger;
+use Sil\Psr3Adapters\Psr3StdOutLogger;
 use Sil\Psr3Adapters\Psr3SyslogLogger;
 use Sil\Psr3Adapters\Psr3Yii2Logger;
 
