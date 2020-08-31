@@ -17,6 +17,11 @@ class Psr3EveryLoggerTest extends TestCase
     // Excluding Psr3Yii2Logger, because it needs a rework,
     // and this is just to get console working
 
+    public function testLogKnownLogLevelConsole()
+    {
+        $this->checkSpecificLogger(new Psr3ConsoleLogger());
+    }
+
     public function testLogKnownLogLevelEcho()
     {
         $this->checkSpecificLogger(new Psr3EchoLogger());
