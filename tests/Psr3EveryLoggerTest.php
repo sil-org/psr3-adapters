@@ -5,6 +5,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel as PsrLogLevel;
 use Sil\Psr3Adapters\Psr3ConsoleLogger;
+use Sil\Psr3Adapters\Psr3EchoLogger;
 use Sil\Psr3Adapters\Psr3FakeLogger;
 use Sil\Psr3Adapters\Psr3SamlLogger;
 use Sil\Psr3Adapters\Psr3SyslogLogger;
