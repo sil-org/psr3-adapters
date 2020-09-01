@@ -11,4 +11,4 @@ update:
 	docker-compose run --rm cli bash -c "composer update"
 
 test:
-	docker-compose run --rm cli bash -c "cd /data/tests; ./phpunit ."
+	docker-compose run --rm cli bash -c "cd /data/tests; ../vendor/bin/phpunit ."
