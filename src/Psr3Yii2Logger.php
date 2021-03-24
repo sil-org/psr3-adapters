@@ -13,11 +13,6 @@ use Yii;
  */
 class Psr3Yii2Logger extends LoggerBase
 {
-    public function __construct()
-    {
-        $this->isArraySupported = true;
-    }
-    
     /**
      * Log a message.
      *
@@ -30,14 +25,14 @@ class Psr3Yii2Logger extends LoggerBase
     public function log($level, $message, array $context = [])
     {
         if (is_array($message)) {
-            $messageToLog = $this->interpolateArray($message, $context);
+            $messageToLog = array_merge($message, $context);
         } else {
             $messageToLog = $this->interpolate($message, $context);
         }
         switch ($level) {
+            case PsrLogLevel::EMERGENCY:
             case PsrLogLevel::ALERT:
             case PsrLogLevel::CRITICAL:
-            case PsrLogLevel::EMERGENCY:
             case PsrLogLevel::ERROR:
                 Yii::error($messageToLog);
                 break;
