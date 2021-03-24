@@ -49,7 +49,6 @@ class Psr3FakeLogger extends LoggerBase
             $position = strpos($entry, $needle);
             $looseMatch = ($position !== false) || $looseMatch;
         }
-        $returnValue = $strict ? $strictMatch : $looseMatch;
-        return $returnValue;
+        return $strict ? $strictMatch : $looseMatch;
     }
 }
