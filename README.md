@@ -18,6 +18,6 @@ Various PSR3-compatible logging adapters.
 - This writes to stdout, bypassing any output buffering that PHP might be doing.
 
 ### Psr3Yii2Logger
-- Make sure your Yii config bootstraps the `log` componenet. In other words,
+- Make sure your Yii config bootstraps the `log` component. In other words,
   include something like this in your Yii config:
   `'bootstrap' => ['log']`
