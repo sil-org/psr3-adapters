@@ -6,7 +6,7 @@ ENV REFRESHED_AT 2021-03-24
 # Make sure apt has current list/updates
 RUN apt-get update -y \
 # Fix timezone stuff from hanging.
-    && echo "America/New_York" > /etc/timezone \
+    && echo "Etc/UTC" > /etc/timezone \
     && apt-get install -y tzdata \
 # Install necessary PHP building blocks
     && apt-get install -y zip unzip make curl wget \
