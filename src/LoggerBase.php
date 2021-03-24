@@ -1,11 +1,13 @@
 <?php
 namespace Sil\Psr3Adapters;
 
+use Psr\Log\AbstractLogger;
+
 /**
  * A base class that implements the interpolate function, to reduce duplication
  * in logger classes provided by this project.
  */
-abstract class LoggerBase extends \Psr\Log\AbstractLogger
+abstract class LoggerBase extends AbstractLogger
 {
     /**
      * @var bool Whether the system this adapter connects to can support an
@@ -16,19 +18,15 @@ abstract class LoggerBase extends \Psr\Log\AbstractLogger
     /**
      * Interpolate context values into the message placeholders.
      * 
-     * @param string|array $message The data to be logged.
+     * @param string $message The data to be logged.
      * @param array $context (Optional:) The array of values to insert into the
      *     corresponding placeholders.
-     * @return mixed The resulting log message.
+     * @return string The resulting log message.
      */
-    protected function interpolate($message, array $context = [])
+    protected function interpolate($message, array $context = []): string
     {
         if (is_string($message)) {
             return $this->interpolateString($message, $context);
-        }
-        
-        if (is_array($message) && $this->isArraySupported) {
-            return \array_merge($message, $context);
         }
         
         return $this->interpolateString(
@@ -36,7 +34,20 @@ abstract class LoggerBase extends \Psr\Log\AbstractLogger
             $context
         );
     }
-    
+
+    /**
+     * Interpolate context values into the message placeholders.
+     *
+     * @param array $message The data to be logged.
+     * @param array $context (Optional:) The array of values to insert into the
+     *     corresponding placeholders.
+     * @return array The resulting log message.
+     */
+    protected function interpolateArray($message, array $context = []): array
+    {
+        return \array_merge($message, $context);
+    }
+
     /**
      * Interpolate context values into the given string.
      * 
