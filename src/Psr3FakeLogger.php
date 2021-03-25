@@ -30,7 +30,7 @@ class Psr3FakeLogger extends LoggerBase
     /**
      * @return bool
      */
-    public function hasLogs()
+    public function hasLogs(): bool
     {
         return !empty($this->log);
     }
@@ -40,7 +40,7 @@ class Psr3FakeLogger extends LoggerBase
      * @param bool $strict
      * @return bool
      */
-    public function hasSpecificLog($needle, $strict = false)
+    public function hasSpecificLog(string $needle, $strict = false): bool
     {
         $strictMatch = false;
         $looseMatch = false;
@@ -49,7 +49,6 @@ class Psr3FakeLogger extends LoggerBase
             $position = strpos($entry, $needle);
             $looseMatch = ($position !== false) || $looseMatch;
         }
-        $returnValue = $strict ? $strictMatch : $looseMatch;
-        return $returnValue;
+        return $strict ? $strictMatch : $looseMatch;
     }
 }

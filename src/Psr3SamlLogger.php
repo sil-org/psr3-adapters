@@ -1,6 +1,7 @@
 <?php
 namespace Sil\Psr3Adapters;
 
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel as PsrLogLevel;
 use SimpleSAML\Logger;
 
@@ -17,7 +18,7 @@ class Psr3SamlLogger extends LoggerBase
      * @param string $message The message to log, possibly with {placeholder}s.
      * @param array $context An array of placeholder => value entries to insert
      *     into the message.
-     * @return null
+     * @return void
      */
     public function log($level, $message, array $context = [])
     {
@@ -48,7 +49,7 @@ class Psr3SamlLogger extends LoggerBase
                 Logger::debug($messageWithContext);
                 break;
             default:
-                throw new \Psr\Log\InvalidArgumentException(
+                throw new InvalidArgumentException(
                     'Unknown log level: ' . var_export($level, true),
                     1485455196
                 );

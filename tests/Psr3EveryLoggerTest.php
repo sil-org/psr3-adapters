@@ -11,11 +11,24 @@ use Sil\Psr3Adapters\Psr3SamlLogger;
 use Sil\Psr3Adapters\Psr3StdOutLogger;
 use Sil\Psr3Adapters\Psr3SyslogLogger;
 use Sil\Psr3Adapters\Psr3Yii2Logger;
+use yii\console\Application;
 
 class Psr3EveryLoggerTest extends TestCase
 {
-    // Excluding Psr3Yii2Logger, because it needs a rework,
-    // and this is just to get console working
+    public function __construct(?string $name = null, array $data = [], $dataName = '')
+    {
+        require_once dirname(__DIR__) . "/vendor/yiisoft/yii2/Yii.php";
+        new Application([
+            'id' => 'Testing',
+            'basePath' => dirname(__DIR__)
+        ]);
+        parent::__construct($name, $data, $dataName);
+    }
+
+    public function testLogKnownLogLevelYii2()
+    {
+        $this->checkSpecificLogger(new Psr3Yii2Logger());
+    }
 
     public function testLogKnownLogLevelConsole()
     {
@@ -53,7 +66,7 @@ class Psr3EveryLoggerTest extends TestCase
      */
     private function checkSpecificLogger($logger)
     {
-        $this->assertIsObject(
+        self::assertIsObject(
             $logger,
             sprintf(
                 'Expected an object for the logger for the %s test',
@@ -96,5 +109,18 @@ class Psr3EveryLoggerTest extends TestCase
         $logger = new Psr3Yii2Logger();
         $this->expectException('\Psr\Log\InvalidArgumentException');
         $logger->log('unknown', 'A test message');
+    }
+
+    public function testArrayYii2()
+    {
+        $logger = new Psr3Yii2Logger();
+        $message = [
+            'from' => ['log@example.com'],
+            'to' => ['developer1@example.com', 'developer2@example.com'],
+            'subject' => 'Log message',
+            'formattedMessage' => ['Do not attempt to follow this example.'],
+        ];
+        $logger->log(PsrLogLevel::ERROR, $message);
+        self::assertTrue(true, 'No errors means it likely worked.');
     }
 }
