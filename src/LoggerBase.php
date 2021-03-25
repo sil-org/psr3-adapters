@@ -1,34 +1,26 @@
 <?php
 namespace Sil\Psr3Adapters;
 
+use Psr\Log\AbstractLogger;
+
 /**
  * A base class that implements the interpolate function, to reduce duplication
  * in logger classes provided by this project.
  */
-abstract class LoggerBase extends \Psr\Log\AbstractLogger
+abstract class LoggerBase extends AbstractLogger
 {
-    /**
-     * @var bool Whether the system this adapter connects to can support an
-     *     array as the log message (for more structured logs).
-     */
-    protected $isArraySupported = false;
-    
     /**
      * Interpolate context values into the message placeholders.
      * 
-     * @param string|array $message The data to be logged.
+     * @param string $message The data to be logged.
      * @param array $context (Optional:) The array of values to insert into the
      *     corresponding placeholders.
-     * @return mixed The resulting log message.
+     * @return string The resulting log message.
      */
-    protected function interpolate($message, array $context = [])
+    protected function interpolate($message, array $context = []): string
     {
         if (is_string($message)) {
             return $this->interpolateString($message, $context);
-        }
-        
-        if (is_array($message) && $this->isArraySupported) {
-            return \array_merge($message, $context);
         }
         
         return $this->interpolateString(
@@ -36,7 +28,7 @@ abstract class LoggerBase extends \Psr\Log\AbstractLogger
             $context
         );
     }
-    
+
     /**
      * Interpolate context values into the given string.
      * 
@@ -48,7 +40,7 @@ abstract class LoggerBase extends \Psr\Log\AbstractLogger
      *     corresponding placeholders.
      * @return string The resulting string.
      */
-    private function interpolateString($message, array $context = [])
+    private function interpolateString(string $message, array $context = []): string
     {
         // Build a replacement array with braces around the context keys.
         $replace = [];
