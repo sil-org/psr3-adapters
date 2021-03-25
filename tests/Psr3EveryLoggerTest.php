@@ -114,8 +114,13 @@ class Psr3EveryLoggerTest extends TestCase
     public function testArrayYii2()
     {
         $logger = new Psr3Yii2Logger();
-        $errorMessages = ['Error Message 1', 'Error Message 2'];
-        $logger->log(PsrLogLevel::ERROR, $errorMessages);
+        $message = [
+            'from' => ['log@example.com'],
+            'to' => ['developer1@example.com', 'developer2@example.com'],
+            'subject' => 'Log message',
+            'formattedMessage' => ['Do not attempt to follow this example.'],
+        ];
+        $logger->log(PsrLogLevel::ERROR, $message);
         self::assertTrue(true, 'No errors means it likely worked.');
     }
 }
