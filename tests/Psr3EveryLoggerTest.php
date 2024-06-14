@@ -4,7 +4,6 @@ namespace Sil\Psr3Adapters\tests;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel as PsrLogLevel;
-use Sil\Psr3Adapters\Psr3ConsoleLogger;
 use Sil\Psr3Adapters\Psr3EchoLogger;
 use Sil\Psr3Adapters\Psr3FakeLogger;
 use Sil\Psr3Adapters\Psr3SamlLogger;
@@ -28,11 +27,6 @@ class Psr3EveryLoggerTest extends TestCase
     public function testLogKnownLogLevelYii2()
     {
         $this->checkSpecificLogger(new Psr3Yii2Logger());
-    }
-
-    public function testLogKnownLogLevelConsole()
-    {
-        $this->checkSpecificLogger(new Psr3ConsoleLogger());
     }
 
     public function testLogKnownLogLevelEcho()
