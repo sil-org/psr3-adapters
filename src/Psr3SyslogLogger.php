@@ -2,6 +2,7 @@
 namespace Sil\Psr3Adapters;
 
 use Monolog\Handler\SyslogHandler;
+use Monolog\Level;
 use Monolog\Logger;
 
 /**
@@ -17,7 +18,7 @@ class Psr3SyslogLogger extends LoggerBase
         $this->logger->pushHandler(new SyslogHandler(
             $ident,
             LOG_USER,
-            Logger::WARNING
+            Level::Warning
         ));
     }
 
