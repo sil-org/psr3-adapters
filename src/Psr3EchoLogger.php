@@ -8,13 +8,9 @@ namespace Sil\Psr3Adapters;
 class Psr3EchoLogger extends LoggerBase
 {
     /**
-     * Log a message.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         echo sprintf(
             'LOG: [%s] %s',

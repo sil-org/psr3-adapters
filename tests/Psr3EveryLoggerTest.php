@@ -52,8 +52,12 @@ class Psr3EveryLoggerTest extends TestCase
 
     public function testLogKnownLogLevelSaml()
     {
-        putenv('SIMPLESAMLPHP_CONFIG_DIR=../vendor/simplesamlphp/simplesamlphp/config-templates/');
+        putenv('SIMPLESAMLPHP_CONFIG_DIR=.');
+        copy('../vendor/simplesamlphp/simplesamlphp/config/config.php.dist', './config.php');
+        copy('../vendor/simplesamlphp/simplesamlphp/config/authsources.php.dist', './authsources.php');
         $this->checkSpecificLogger(new Psr3SamlLogger());
+        unlink('./authsources.php');
+        unlink('./config.php');
     }
 
     public function testLogKnownLogLevelFake()
@@ -114,12 +118,12 @@ class Psr3EveryLoggerTest extends TestCase
     public function testArrayYii2()
     {
         $logger = new Psr3Yii2Logger();
-        $message = [
+        $message = json_encode([
             'from' => ['log@example.com'],
             'to' => ['developer1@example.com', 'developer2@example.com'],
             'subject' => 'Log message',
             'formattedMessage' => ['Do not attempt to follow this example.'],
-        ];
+        ]);
         $logger->log(PsrLogLevel::ERROR, $message);
         self::assertTrue(true, 'No errors means it likely worked.');
     }

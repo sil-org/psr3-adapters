@@ -20,16 +20,11 @@ class Psr3SyslogLogger extends LoggerBase
             Logger::WARNING
         ));
     }
-    
+
     /**
-     * Log a message.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
-     * @return void
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $this->logger->log($level, $message, $context);
     }
