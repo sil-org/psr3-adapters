@@ -9,7 +9,7 @@ namespace Sil\Psr3Adapters;
 class Psr3FakeLogger extends LoggerBase
 {
     /** @var string[] $log */
-    private $log = [];
+    private array $log = [];
 
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class Psr3FakeLogger extends LoggerBase
      * @param bool $strict
      * @return bool
      */
-    public function hasSpecificLog(string $needle, $strict = false): bool
+    public function hasSpecificLog(string $needle, bool $strict = false): bool
     {
         $strictMatch = false;
         $looseMatch = false;

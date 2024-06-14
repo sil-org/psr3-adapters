@@ -10,7 +10,7 @@ use Monolog\Logger;
  */
 class Psr3SyslogLogger extends LoggerBase
 {
-    private $logger;
+    private Logger $logger;
     
     public function __construct($name = 'name', $ident = 'ident')
     {

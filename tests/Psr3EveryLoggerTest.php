@@ -59,10 +59,7 @@ class Psr3EveryLoggerTest extends TestCase
         $this->checkSpecificLogger(new Psr3FakeLogger());
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
-    private function checkSpecificLogger($logger)
+    private function checkSpecificLogger(LoggerInterface $logger): void
     {
         self::assertIsObject(
             $logger,

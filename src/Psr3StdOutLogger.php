@@ -22,7 +22,7 @@ class Psr3StdOutLogger extends LoggerBase
         );
     }
 
-    private function writeToStdOut($message)
+    private function writeToStdOut(string $message): void
     {
         $fileHandle = fopen('php://stdout', 'w+');
         if ($fileHandle === false) {
