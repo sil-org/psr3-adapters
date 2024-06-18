@@ -9,16 +9,12 @@ namespace Sil\Psr3Adapters;
 class Psr3FakeLogger extends LoggerBase
 {
     /** @var string[] $log */
-    private $log = [];
+    private array $log = [];
 
     /**
-     * Log a message.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $this->log[] = sprintf(
             'LOG: [%s] %s',
@@ -40,7 +36,7 @@ class Psr3FakeLogger extends LoggerBase
      * @param bool $strict
      * @return bool
      */
-    public function hasSpecificLog(string $needle, $strict = false): bool
+    public function hasSpecificLog(string $needle, bool $strict = false): bool
     {
         $strictMatch = false;
         $looseMatch = false;

@@ -4,7 +4,6 @@ namespace Sil\Psr3Adapters\tests;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel as PsrLogLevel;
-use Sil\Psr3Adapters\Psr3ConsoleLogger;
 use Sil\Psr3Adapters\Psr3EchoLogger;
 use Sil\Psr3Adapters\Psr3FakeLogger;
 use Sil\Psr3Adapters\Psr3SamlLogger;
@@ -30,11 +29,6 @@ class Psr3EveryLoggerTest extends TestCase
         $this->checkSpecificLogger(new Psr3Yii2Logger());
     }
 
-    public function testLogKnownLogLevelConsole()
-    {
-        $this->checkSpecificLogger(new Psr3ConsoleLogger());
-    }
-
     public function testLogKnownLogLevelEcho()
     {
         $this->checkSpecificLogger(new Psr3EchoLogger());
@@ -52,8 +46,12 @@ class Psr3EveryLoggerTest extends TestCase
 
     public function testLogKnownLogLevelSaml()
     {
-        putenv('SIMPLESAMLPHP_CONFIG_DIR=../vendor/simplesamlphp/simplesamlphp/config-templates/');
+        putenv('SIMPLESAMLPHP_CONFIG_DIR=.');
+        copy('../vendor/simplesamlphp/simplesamlphp/config/config.php.dist', './config.php');
+        copy('../vendor/simplesamlphp/simplesamlphp/config/authsources.php.dist', './authsources.php');
         $this->checkSpecificLogger(new Psr3SamlLogger());
+        unlink('./authsources.php');
+        unlink('./config.php');
     }
 
     public function testLogKnownLogLevelFake()
@@ -61,10 +59,7 @@ class Psr3EveryLoggerTest extends TestCase
         $this->checkSpecificLogger(new Psr3FakeLogger());
     }
 
-    /**
-     * @param LoggerInterface $logger
-     */
-    private function checkSpecificLogger($logger)
+    private function checkSpecificLogger(LoggerInterface $logger): void
     {
         self::assertIsObject(
             $logger,
@@ -114,12 +109,12 @@ class Psr3EveryLoggerTest extends TestCase
     public function testArrayYii2()
     {
         $logger = new Psr3Yii2Logger();
-        $message = [
+        $message = json_encode([
             'from' => ['log@example.com'],
             'to' => ['developer1@example.com', 'developer2@example.com'],
             'subject' => 'Log message',
             'formattedMessage' => ['Do not attempt to follow this example.'],
-        ];
+        ]);
         $logger->log(PsrLogLevel::ERROR, $message);
         self::assertTrue(true, 'No errors means it likely worked.');
     }

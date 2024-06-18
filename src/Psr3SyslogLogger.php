@@ -2,6 +2,7 @@
 namespace Sil\Psr3Adapters;
 
 use Monolog\Handler\SyslogHandler;
+use Monolog\Level;
 use Monolog\Logger;
 
 /**
@@ -9,7 +10,7 @@ use Monolog\Logger;
  */
 class Psr3SyslogLogger extends LoggerBase
 {
-    private $logger;
+    private Logger $logger;
     
     public function __construct($name = 'name', $ident = 'ident')
     {
@@ -17,19 +18,14 @@ class Psr3SyslogLogger extends LoggerBase
         $this->logger->pushHandler(new SyslogHandler(
             $ident,
             LOG_USER,
-            Logger::WARNING
+            Level::Warning
         ));
     }
-    
+
     /**
-     * Log a message.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
-     * @return void
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $this->logger->log($level, $message, $context);
     }

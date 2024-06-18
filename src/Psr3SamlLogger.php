@@ -12,15 +12,9 @@ use SimpleSAML\Logger;
 class Psr3SamlLogger extends LoggerBase
 {
     /**
-     * Log a message.
-     *
-     * @param mixed $level One of the \Psr\Log\LogLevel::* constants.
-     * @param string $message The message to log, possibly with {placeholder}s.
-     * @param array $context An array of placeholder => value entries to insert
-     *     into the message.
-     * @return void
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $messageWithContext = $this->interpolate($message, $context);
         switch ($level) {

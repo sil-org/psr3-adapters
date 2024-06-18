@@ -1,14 +1,14 @@
 it-now: clean install test
 
 clean:
-	docker-compose kill
-	docker-compose rm -f
+	docker compose kill
+	docker compose rm -f
 
 install:
-	docker-compose run --rm cli bash -c "composer install"
+	docker compose run --rm cli bash -c "composer install"
 
 update:
-	docker-compose run --rm cli bash -c "composer update"
+	docker compose run --rm cli bash -c "composer update"
 
 test:
-	docker-compose run --rm cli bash -c "cd /data/tests; ../vendor/bin/phpunit ."
+	docker compose run --rm cli bash -c "cd /data/tests; ../vendor/bin/phpunit ."

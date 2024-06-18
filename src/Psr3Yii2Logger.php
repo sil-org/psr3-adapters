@@ -14,21 +14,12 @@ use Yii;
 class Psr3Yii2Logger extends LoggerBase
 {
     /**
-     * Log a message.
-     *
-     * @param mixed $level One of the \Psr\Log\LogLevel::* constants.
-     * @param string|array $message The message to log, possibly with {placeholder}s.
-     * @param array $context An array of placeholder => value entries to insert
-     *     into the message.
-     * @return void
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
-        if (is_array($message)) {
-            $messageToLog = array_merge($message, $context);
-        } else {
-            $messageToLog = $this->interpolate($message, $context);
-        }
+        $messageToLog = $this->interpolate($message, $context);
+
         switch ($level) {
             case PsrLogLevel::EMERGENCY:
             case PsrLogLevel::ALERT:

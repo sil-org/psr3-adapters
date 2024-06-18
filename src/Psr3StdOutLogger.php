@@ -9,13 +9,9 @@ namespace Sil\Psr3Adapters;
 class Psr3StdOutLogger extends LoggerBase
 {
     /**
-     * Log a message.
-     *
-     * @param mixed $level
-     * @param string $message
-     * @param array $context
+     * {@inheritdoc}
      */
-    public function log($level, $message, array $context = [])
+    public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
         $this->writeToStdOut(
             sprintf(
@@ -26,7 +22,7 @@ class Psr3StdOutLogger extends LoggerBase
         );
     }
 
-    private function writeToStdOut($message)
+    private function writeToStdOut(string $message): void
     {
         $fileHandle = fopen('php://stdout', 'w+');
         if ($fileHandle === false) {
