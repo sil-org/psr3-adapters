@@ -8,7 +8,7 @@ Various PSR3-compatible logging adapters.
 
 A basic PSR-3 compliant logger that merely echoes logs to the console (primarily intended for use in tests).
 
-This `echo`es out the log messages, allowing the output to be buffered so that it appears at the expected place within the rest of the output (such as in tests).
+This will `echo` out the log messages, allowing the output to be buffered so that it appears at the expected place within the rest of the output (such as in tests).
 
 ### Psr3FakeLogger
 
