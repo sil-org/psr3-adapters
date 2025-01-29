@@ -42,7 +42,8 @@
     "config": {
         "allow-plugins": {
             "yiisoft/yii2-composer": true,
-            "simplesamlphp/composer-module-installer": false
+            "simplesamlphp/composer-module-installer": false,
+            "simplesamlphp/composer-xmlprovider-installer": false
         }
     }
 }
