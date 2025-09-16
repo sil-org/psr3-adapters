@@ -1,9 +1,8 @@
 {
-    "name": "silinternational/psr3-adapters",
+    "name": "sil-org/psr3-adapters",
     "description": "Various PSR3-compatible logging adapters.",
     "type": "library",
     "license": "MIT",
-    "version": "4.0.0",
     "authors": [
         {
             "name": "Matt Henderson",
