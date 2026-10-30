@@ -18,7 +18,7 @@ class Psr3Yii2Logger extends LoggerBase
      */
     public function log(mixed $level, string|\Stringable $message, array $context = []): void
     {
-        $messageToLog = $this->interpolate($message, $context);
+        $messageToLog = $this->interpolateWithContext($message, $context);
 
         switch ($level) {
             case PsrLogLevel::EMERGENCY:

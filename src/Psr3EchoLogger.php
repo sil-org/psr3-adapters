@@ -15,7 +15,7 @@ class Psr3EchoLogger extends LoggerBase
         echo sprintf(
             'LOG: [%s] %s',
             $level,
-            $this->interpolate($message, $context)
+            $this->interpolateWithContext($message, $context)
         ) . PHP_EOL;
     }
 }

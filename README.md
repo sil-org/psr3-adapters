@@ -2,6 +2,19 @@
 Various PSR3-compatible logging adapters.
 
 
+## Context
+
+Context values are interpolated into `{placeholder}`s in the message. In addition, `Psr3EchoLogger`,
+`Psr3StdOutLogger`, `Psr3SamlLogger`, and `Psr3Yii2Logger` append every context entry to the logged message as
+`key=value` pairs, for example:
+
+```
+LOG: [error] Login failed for bob user=bob attempts=3
+```
+
+Strings containing whitespace, quotes, or `=` are quoted; arrays are JSON-encoded; exceptions are logged as
+`Class: message at file:line`.
+
 ## Adapter-specific notes
 
 ### Psr3EchoLogger
